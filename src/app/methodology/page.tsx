@@ -17,12 +17,21 @@ export default function MethodologyPage() {
           <CardTitle>The Motivation</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4 text-slate-700">
-          <p>
-            The inspiration for this project came from the concept of <strong>"Equal Pay Day."</strong> Every year, usually in November, articles and campaigns point out that because of the gender pay gap, "from now on, women effectively work for free for the rest of the year" compared to their male counterparts.
-          </p>
-          <p>
-            This framing is incredibly powerful because it translates abstract percentages into a visceral, relatable concept: time. We wanted to take that exact same conceptual framework and apply it to global economic inequality. If a person in an average-income country makes a fraction of what someone in a high-income benchmark country makes, at what point in the calendar year have they "stopped earning" relative to that benchmark? This calendar provides that visualization.
-          </p>
+            <p>
+              The idea for Economic Calendar came in 2025, when I saw an NRK article saying that, because of the pay gap, women could be said to ‘work for free’ from a certain date until the end of the year.
+            </p>
+            <p>
+              I’m not going to get into the pay‑gap debate here, but the way they turned a percentage into a date stuck with me. It made something abstract much easier to picture.
+            </p>
+            <p>
+              That made me wonder whether the same idea could be used to show economic differences between countries.
+            </p>
+            <p>
+              Instead of only saying that one country is at, for example, 50% of another country’s level, why not turn that 50% into a point halfway through the year?
+            </p>
+            <p>
+              That became the basic idea behind Economic Calendar.
+            </p>
         </CardContent>
       </Card>
 

@@ -1,3 +1,4 @@
+
 import { getYears, getMetrics, getCountries, countCountriesWithData, getCountryData, getLatestAvailableYear } from "@/lib/db";
 import { Selectors } from "@/components/Selectors";
 import { CountdownWidget } from "@/components/CountdownWidget";
@@ -23,9 +24,7 @@ export const metadata = {
 };
 export default function Home({
   searchParams,
-}: {
-  searchParams: { year?: string; indicator?: string; benchmark?: string };
-}) {
+}: { searchParams: { year?: string; indicator?: string; benchmark?: string } }) {
   const years = getYears();
   const countries = getCountries();
 
@@ -39,7 +38,6 @@ export default function Home({
   const benchmarkRecord = getCountryData(currentBenchmark, currentYear, currentIndicator);
   const benchmarkHasData = !!benchmarkRecord;
   const benchmarkLatestYear = benchmarkHasData ? currentYear : getLatestAvailableYear(currentBenchmark, currentIndicator);
-
 
   const rawData = getMetrics(currentYear, currentIndicator);
   const benchmarkCountry = rawData.find(d => d.country_code === currentBenchmark);
@@ -69,11 +67,16 @@ export default function Home({
 
       <div className="text-center space-y-6 mb-12">
         <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
-          When does the world reach <span className="text-blue-600">{benchmarkName}'s</span> economic level?
+          Welcome to the Economic Calendar
         </h1>
         <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
-          We compare each country's average economic output to {benchmarkName} and display the result as a calendar date.
-          The date represents when, during the year, the average person in that country would reach their {benchmarkName}-comparable annual income level.
+          The idea for this came in 2025, when I saw an NRK article saying that, because of the pay gap, women could be said to ‘work for free’ from a certain date until the end of the year.
+        </p>
+        <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          I’m not going to get into the pay‑gap debate here, but the way they turned a percentage into a date stuck with me. It made something abstract much easier to picture. That got me thinking: could you do the same thing with economic differences between countries? So I built it.
+        </p>
+        <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          Welcome to the Economic Calendar.
         </p>
       </div>
 
@@ -96,7 +99,7 @@ export default function Home({
             className="group flex flex-col p-6 rounded-xl border-2 border-blue-100 hover:border-blue-500 hover:bg-blue-50 transition-all">
             <CalendarDays className="w-10 h-10 text-blue-600 mb-4" />
             <h3 className="text-xl font-bold mb-2 group-hover:text-blue-700">Calendar View</h3>
-            <p className="text-slate-600 text-sm flex-1">Explore a 365-day visualization showing when countries reach their income-equivalent date.</p>
+            <p className="text-slate-600 text-sm flex-1">Explore a 365-day visualization showing when countries reach their income‑equivalent date.</p>
             <div className="flex items-center text-blue-600 text-sm font-semibold mt-4 group-hover:translate-x-1 transition-transform">
               View Calendar <ArrowRight className="w-4 h-4 ml-1" />
             </div>
@@ -106,7 +109,7 @@ export default function Home({
             className="group flex flex-col p-6 rounded-xl border-2 border-emerald-100 hover:border-emerald-500 hover:bg-emerald-50 transition-all">
             <MapIcon className="w-10 h-10 text-emerald-600 mb-4" />
             <h3 className="text-xl font-bold mb-2 group-hover:text-emerald-700">Interactive Map</h3>
-            <p className="text-slate-600 text-sm flex-1">Explore a color-graded global map showing economic ratios relative to {benchmarkName}.</p>
+            <p className="text-slate-600 text-sm flex-1">Explore a color‑graded global map showing economic ratios relative to {benchmarkName}.</p>
             <div className="flex items-center text-emerald-600 text-sm font-semibold mt-4 group-hover:translate-x-1 transition-transform">
               View Map <ArrowRight className="w-4 h-4 ml-1" />
             </div>
@@ -125,13 +128,15 @@ export default function Home({
       </div>
 
       <div className="bg-blue-50 border border-blue-100 rounded-2xl p-8">
-        <h3 className="text-lg font-bold text-blue-900 mb-2">Why Norway?</h3>
+        <h3 className="text-lg font-bold text-blue-900 mb-2">
+          Why Norway?
+        </h3>
         <p className="text-blue-800/80 mb-4">
           Norway consistently ranks among the highest in the world for GNI per capita and standard of living.
-          By using it as the default benchmark, we can contextualize global economic inequality in an intuitive, time-based format.
+          By using it as the default benchmark, we can contextualize global economic inequality in an intuitive, time‑based format.
         </p>
         <Link href="/methodology" className="text-blue-700 font-semibold hover:underline">
-          Read our full methodology and limitations &rarr;
+          Read our full methodology and limitations →
         </Link>
       </div>
     </div>
