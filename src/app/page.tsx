@@ -6,18 +6,19 @@ import { ArrowRight, CalendarDays, BarChart, MapIcon } from "lucide-react";
 export const metadata = {
   title: "What if global economic differences were a calendar?",
   description: "Compare countries using GNI and GDP per capita, and see economic differences translated into calendar dates, maps and rankings.",
+  metadataBase: new URL('https://economic-calendar-topaz.vercel.app'),
   openGraph: {
     title: "What if global economic differences were a calendar?",
     description: "Compare countries using GNI and GDP per capita, and see economic differences translated into calendar dates, maps and rankings.",
     url: "https://economic-calendar-topaz.vercel.app/",
-    images: [{ url: "/og-image.png", width: 1200, height: 627 }],
+    images: [{ url: "https://economic-calendar-topaz.vercel.app/og-image.png", width: 1200, height: 627, type: "image/png", alt: "Economic Calendar – visualizing global economic differences" }],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "What if global economic differences were a calendar?",
     description: "Compare countries using GNI and GDP per capita, and see economic differences translated into calendar dates, maps and rankings.",
-    images: ["/og-image.png"],
+    images: ["https://economic-calendar-topaz.vercel.app/og-image.png"],
   },
 };
 export default function Home({

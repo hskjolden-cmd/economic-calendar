@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/react";
 import Link from "next/link";
 import { CalendarIcon, Globe, Info, BarChart3, MapIcon } from "lucide-react";
 
@@ -59,6 +60,7 @@ export default function RootLayout({
             </div>
           </div>
         </footer>
+        <Analytics />
       </body>
     </html>
   );
