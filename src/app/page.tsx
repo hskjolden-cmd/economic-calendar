@@ -132,12 +132,8 @@ export default function Home({
           Why Norway?
         </h3>
         <p className="text-blue-800/80 mb-4">
-          Norway consistently ranks among the highest in the world for GNI per capita and standard of living.
-          By using it as the default benchmark, we can contextualize global economic inequality in an intuitive, time‑based format.
+          Norway is simply the default benchmark because that’s where I’m from. You can change it to any country you like.
         </p>
-        <Link href="/methodology" className="text-blue-700 font-semibold hover:underline">
-          Read our full methodology and limitations →
-        </Link>
       </div>
     </div>
   );

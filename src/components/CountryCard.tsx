@@ -48,11 +48,10 @@ export function CountryCard({
         </div>
 
         <div className="bg-slate-100 p-4 rounded-lg mt-4">
-          <p className="text-sm text-slate-700 font-medium">Income-equivalent Date</p>
+          <p className="text-sm text-slate-700 font-medium">Economic level date</p>
           <p className="text-2xl font-bold text-slate-900 mt-1">{formattedDate}</p>
           <p className="text-xs text-slate-500 mt-2 leading-relaxed">
-            On this date, the average person in {data.country_name} has earned the equivalent 
-            of what the average person in {benchmarkName} earns in a full year, based on {metricName.toLowerCase()}.
+            This date shows when {data.country_name}'s economic output per person reaches the same point in the benchmark year as {benchmarkName}'s, using the selected metric.
           </p>
         </div>
       </CardContent>
