@@ -10,11 +10,13 @@ INDICATORS = {
     'gdp_nom': 'NY.GDP.PCAP.CD'
 }
 
-YEARS = "2015:2023" # Range of years to fetch
+START_YEAR = 2015
+END_YEAR = datetime.now().year - 1
+YEARS = f"{START_YEAR}:{END_YEAR}"
 DB_PATH = 'economic_data.db'
 
 def fetch_indicator_data(indicator_code):
-    url = f"http://api.worldbank.org/v2/country/all/indicator/{indicator_code}?format=json&per_page=5000&date={YEARS}"
+    url = f"https://api.worldbank.org/v2/country/all/indicator/{indicator_code}?format=json&per_page=5000&date={YEARS}&source=2"
     response = requests.get(url)
     if response.status_code != 200:
         print(f"Failed to fetch data for {indicator_code}")
@@ -27,7 +29,7 @@ def fetch_indicator_data(indicator_code):
     return data[1]
 
 def get_countries_info():
-    url = "http://api.worldbank.org/v2/country/all?format=json&per_page=5000"
+    url = "https://api.worldbank.org/v2/country/all?format=json&per_page=5000&source=2"
     response = requests.get(url)
     data = response.json()
     if len(data) < 2:
@@ -91,7 +93,7 @@ def main():
     records_to_insert = []
     
     # We need to process by year and indicator
-    for year in range(2015, 2024):
+    for year in range(START_YEAR, END_YEAR + 1):
         for ind_key in INDICATORS.keys():
             # Get Norway value for this year and indicator
             norway_val = raw_data.get((norway_code, year, ind_key))
