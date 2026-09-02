@@ -1,6 +1,7 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
+import { countCountriesWithData } from '@/lib/db';
 
 export function Selectors({ 
   years, 
