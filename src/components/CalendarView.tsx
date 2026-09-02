@@ -1,8 +1,11 @@
 'use client';
 
 import { MetricRecord } from '@/types';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { CountryCard } from './CountryCard';
+import { X } from 'lucide-react';
+
+// Scroll lock effect moved into component
 import { format, addDays } from 'date-fns';
 import { REGION_COLORS, getRegionColor } from '@/lib/colors';
 
@@ -18,6 +21,25 @@ export function CalendarView({
   benchmarkName?: string
 }) {
   const [selectedCountry, setSelectedCountry] = useState<MetricRecord | null>(null);
+
+  // Scroll lock and Escape key handler for modal
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setSelectedCountry(null);
+      }
+    };
+    if (selectedCountry) {
+      document.body.classList.add('overflow-hidden');
+      document.addEventListener('keydown', handleKey);
+    } else {
+      document.body.classList.remove('overflow-hidden');
+    }
+    return () => {
+      document.body.classList.remove('overflow-hidden');
+      document.removeEventListener('keydown', handleKey);
+    };
+  }, [selectedCountry]);
 
   // Group data by day of year (1-365)
   const daysMap = useMemo(() => {
@@ -49,6 +71,8 @@ export function CalendarView({
           </div>
         ))}
       </div>
+
+      <p className="text-sm text-center text-slate-600 lg:hidden mt-2 mb-4">Tap a dot to view country details</p>
 
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="flex-1 overflow-x-auto">
@@ -106,7 +130,7 @@ export function CalendarView({
         </div>
         
         <div className="w-full lg:w-96">
-          <div className="sticky top-24">
+          <div className="sticky top-24 hidden lg:block">
             {selectedCountry ? (
               <CountryCard 
                 data={selectedCountry} 
@@ -125,6 +149,33 @@ export function CalendarView({
           </div>
         </div>
       </div>
+
+      {selectedCountry && (
+        <div
+          className="lg:hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm z-50 p-4"
+          role="dialog"
+          aria-modal="true"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setSelectedCountry(null);
+          }}
+        >
+          <div className="bg-white rounded-lg max-w-md w-full p-4 relative transform transition-transform duration-300 ease-out scale-100">
+            <button
+              className="absolute top-2 right-2 p-1 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              aria-label="Close"
+              onClick={() => setSelectedCountry(null)}
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <CountryCard 
+              data={selectedCountry} 
+              metricName={metricName} 
+              benchmarkName={benchmarkName}
+              benchmarkValue={data.find((d) => d.country_code === benchmarkCode)?.value}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

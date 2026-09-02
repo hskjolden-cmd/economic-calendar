@@ -85,8 +85,17 @@ export default function NavBar() {
         <div
           ref={menuRef}
           className="fixed inset-0 bg-white bg-opacity-95 backdrop-blur-sm z-40 flex flex-col pt-20 px-4"
+          onClick={() => setOpen(false)}
         >
-          <nav className="flex flex-col gap-4" aria-label="Mobile navigation">
+          {/* Close button inside panel */}
+          <button
+            className="absolute top-4 right-4 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            aria-label="Close menu"
+            onClick={(e) => { e.stopPropagation(); setOpen(false); }}
+          >
+            <X className="w-6 h-6" />
+          </button>
+          <nav className="flex flex-col gap-4" aria-label="Mobile navigation" onClick={(e) => e.stopPropagation()}>
             {navLinks.map((link) => (
               <Link
                 key={link.href}
