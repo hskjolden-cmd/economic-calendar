@@ -131,7 +131,7 @@ export default function Home({
         <h3 className="text-lg font-bold text-blue-900 mb-2">
           Why Norway?
         </h3>
-        <p className="text-blue-800/80 mb-4">
+        <p className="text-blue-800/80">
           Norway is simply the default benchmark because that’s where I’m from. You can change it to any country you like.
         </p>
       </div>
