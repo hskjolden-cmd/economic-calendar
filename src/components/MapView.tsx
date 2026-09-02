@@ -14,12 +14,14 @@ export function MapView({
   data, 
   metricName,
   benchmarkCode = 'NOR',
-  benchmarkName = 'Norway'
+  benchmarkName = 'Norway',
+  indicatorCode,
 }: { 
   data: MetricRecord[], 
   metricName: string,
   benchmarkCode?: string,
-  benchmarkName?: string
+  benchmarkName?: string,
+  indicatorCode: string,
 }) {
   // Color scale based on the ratio to benchmark
   const colorScale = scaleLinear<string>()
@@ -61,7 +63,7 @@ export function MapView({
                   const isBenchmark = countryCode === benchmarkCode;
                   
                   const tooltipText = d 
-                    ? `${d.country_name}: ${(d.ratio * 100).toFixed(1)}% of ${benchmarkName} ($${Math.round(d.value).toLocaleString()})` 
+                    ? `${d.country_name}: ${(d.ratio * 100).toFixed(1)}% of ${benchmarkName} (${d.value.toLocaleString()})` 
                     : `${geo.properties.name}: No data`;
 
                   return (

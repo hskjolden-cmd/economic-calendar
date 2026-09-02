@@ -70,15 +70,19 @@ export function Selectors({
 
       <div className="flex flex-col gap-1.5">
         <label className="text-sm font-medium text-slate-700">Data Year</label>
-        <select 
-          value={currentYear.toString()} 
-          onChange={(e) => handleYearChange(e.target.value)}
-          className="w-full sm:w-[120px] h-10 px-3 py-2 rounded-lg border border-slate-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
-        >
-          {years.map(y => (
-            <option key={y} value={y.toString()}>{y}</option>
-          ))}
-        </select>
+        <div className="flex items-center gap-2">
+          <select
+            value={currentYear.toString()}
+            onChange={(e) => handleYearChange(e.target.value)}
+            className="w-full sm:w-[120px] h-10 px-3 py-2 rounded-lg border border-slate-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+          >
+            {years.map(y => (
+              <option key={y} value={y.toString()}>{y}</option>
+            ))}
+          </select>
+          {/* Availability indicator */}
+          <span className="text-xs text-slate-500">{`· ${countCountriesWithData(currentYear, currentIndicator)} of ${countries.length} countries`}</span>
+        </div>
       </div>
     </div>
   );

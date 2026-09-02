@@ -104,4 +104,10 @@
   html {
     @apply font-sans;
   }
+
+  /* Muted data styling for missing-data elements */
+  .muted-data {
+    opacity: 0.4;
+    filter: grayscale(100%);
+  }
 }
