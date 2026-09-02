@@ -19,7 +19,8 @@ export default function MapPage({
   
   const benchmarkCountry = rawData.find(d => d.country_code === currentBenchmark);
   const benchmarkValue = benchmarkCountry ? benchmarkCountry.value : 1; // fallback
-  const benchmarkName = benchmarkCountry ? benchmarkCountry.country_name : 'Norway';
+  const benchmarkName = benchmarkCountry?.country_name ??
+    (countries.find(c => c.code === currentBenchmark)?.name ?? 'Unknown');
 
   // Recalculate ratios
   const data = rawData.map(d => {
@@ -54,12 +55,13 @@ export default function MapPage({
       />
 
       <div className="mt-8">
-        <MapView 
-          data={data} 
-          metricName={metricNames[currentIndicator]} 
-          benchmarkCode={currentBenchmark} 
-          benchmarkName={benchmarkName}
-        />
+          <MapView
+            key={currentBenchmark}
+            data={data}
+            metricName={metricNames[currentIndicator]}
+            benchmarkCode={currentBenchmark}
+            benchmarkName={benchmarkName}
+          />
       </div>
     </main>
   );
