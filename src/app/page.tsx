@@ -3,7 +3,23 @@ import { Selectors } from "@/components/Selectors";
 import { CountdownWidget } from "@/components/CountdownWidget";
 import Link from "next/link";
 import { ArrowRight, CalendarDays, BarChart, MapIcon } from "lucide-react";
-
+export const metadata = {
+  title: "What if global income differences were a calendar?",
+  description: "Compare countries using GNI and GDP per capita, and see economic differences translated into calendar dates, maps and rankings.",
+  openGraph: {
+    title: "What if global income differences were a calendar?",
+    description: "Compare countries using GNI and GDP per capita, and see economic differences translated into calendar dates, maps and rankings.",
+    url: "https://economic-calendar-topaz.vercel.app/",
+    images: [{ url: "/og-image.png", width: 1200, height: 627 }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "What if global income differences were a calendar?",
+    description: "Compare countries using GNI and GDP per capita, and see economic differences translated into calendar dates, maps and rankings.",
+    images: ["/og-image.png"],
+  },
+};
 export default function Home({
   searchParams,
 }: {
