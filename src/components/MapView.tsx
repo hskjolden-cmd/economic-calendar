@@ -6,8 +6,8 @@ import { scaleLinear } from 'd3-scale';
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 import { MetricRecord } from '@/types';
-import { getRegionColor } from '@/lib/colors';
 import { getLatestAvailableYear } from '@/lib/db';
+
 
 const geoUrl = "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson";
 
@@ -79,7 +79,8 @@ export function MapView({
                       geography={geo}
                       data-tooltip-id="map-tooltip"
                       data-tooltip-content={tooltipText}
-                      fill={isBenchmark ? '#15803d' : (d ? colorScale(d.ratio) : "#e2e8f0")}
+                      fill={isBenchmark ? '#15803d' : (d ? colorScale(d.ratio) : '#e2e8f0')}
+                      // No className needed; fill already handles missing data
                       stroke="#ffffff"
                       strokeWidth={0.5}
                       style={{
