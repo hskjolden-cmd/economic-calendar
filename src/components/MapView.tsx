@@ -7,21 +7,24 @@ import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 import { MetricRecord } from '@/types';
 import { getRegionColor } from '@/lib/colors';
+import { getLatestAvailableYear } from '@/lib/db';
 
 const geoUrl = "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson";
 
-export function MapView({ 
-  data, 
+export function MapView({
+  data,
   metricName,
   benchmarkCode = 'NOR',
   benchmarkName = 'Norway',
   indicatorCode,
-}: { 
-  data: MetricRecord[], 
+  currentYear,
+}: {
+  data: MetricRecord[],
   metricName: string,
   benchmarkCode?: string,
   benchmarkName?: string,
   indicatorCode: string,
+  currentYear: number,
 }) {
   // Color scale based on the ratio to benchmark
   const colorScale = scaleLinear<string>()
@@ -63,8 +66,12 @@ export function MapView({
                   const isBenchmark = countryCode === benchmarkCode;
                   
                   const tooltipText = d 
-                    ? `${d.country_name}: ${(d.ratio * 100).toFixed(1)}% of ${benchmarkName} (${d.value.toLocaleString()})` 
-                    : `${geo.properties.name}: No data`;
+                    ? `${d.country_name}: ${(d.ratio * 100).toFixed(1)}% of ${benchmarkName} (${d.value.toLocaleString()})`
+                    : (() => {
+                        const latestYear = getLatestAvailableYear(geo.id, indicatorCode);
+                        const yearInfo = latestYear ? `Latest available: ${latestYear}` : 'No data available';
+                        return `${geo.properties.name}: No data for ${currentYear}. ${yearInfo}`;
+                      })();
 
                   return (
                     <Geography

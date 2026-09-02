@@ -61,6 +61,7 @@ export default function MapPage({
           metricName={metricNames[currentIndicator]}
           benchmarkCode={currentBenchmark}
           benchmarkName={benchmarkName}
+          indicatorCode={currentIndicator}
         />
       </div>
     </main>
