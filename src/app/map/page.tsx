@@ -1,4 +1,4 @@
-import { getYears, getMetrics, getCountries } from '@/lib/db';
+import { getYears, getMetrics, getCountries, getLatestAvailableYearForCountries } from '@/lib/db';
 import { Selectors } from '@/components/Selectors';
 import { MapView } from '@/components/MapView';
 
@@ -63,6 +63,7 @@ export default function MapPage({
           benchmarkName={benchmarkName}
           indicatorCode={currentIndicator}
           currentYear={currentYear}
+          latestYearMap={getLatestAvailableYearForCountries(currentIndicator)}
         />
       </div>
     </main>

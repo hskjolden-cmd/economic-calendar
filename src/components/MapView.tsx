@@ -18,6 +18,7 @@ export function MapView({
   benchmarkName = 'Norway',
   indicatorCode,
   currentYear,
+  latestYearMap,
 }: {
   data: MetricRecord[],
   metricName: string,
@@ -25,6 +26,7 @@ export function MapView({
   benchmarkName?: string,
   indicatorCode: string,
   currentYear: number,
+  latestYearMap: Record<string, number>,
 }) {
   // Color scale based on the ratio to benchmark
   const colorScale = scaleLinear<string>()
@@ -66,8 +68,8 @@ export function MapView({
                   const isBenchmark = countryCode === benchmarkCode;
                   
                   const tooltipText = d
-                    ? `${d.country_name}: ${(d.ratio * 100).toFixed(1)}% of ${benchmarkName} (${d.value.toLocaleString()})`
-                    : `${geo.properties.name}: No data for ${currentYear}.`;
+  ? `${d.country_name}: ${(d.ratio * 100).toFixed(1)}% of ${benchmarkName} (${d.value.toLocaleString()})`
+  : `${geo.properties.name}: No data for ${currentYear}. Latest available: ${latestYearMap[countryCode] ?? 'N/A'}.`;
 
                   return (
                     <Geography

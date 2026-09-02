@@ -7,13 +7,21 @@ export default function CalendarPage({
 }: {
   searchParams: { year?: string; indicator?: string; benchmark?: string };
 }) {
-  const years = getYears();
+  const benchmarkLatestYear = benchmarkHasData ? currentYear : getLatestAvailableYear(currentBenchmark, currentIndicator);
+
   const countries = getCountries();
   
   // Defaults
   const currentYear = searchParams.year ? parseInt(searchParams.year) : years[0];
   const currentIndicator = searchParams.indicator || 'gni_ppp';
   const currentBenchmark = searchParams.benchmark || 'NOR';
+
+  // Compute availability after defaults and countries are loaded
+  const availableCount = countCountriesWithData(currentYear, currentIndicator);
+  const totalCountries = countries.length;
+  const benchmarkRecord = getCountryData(currentBenchmark, currentYear, currentIndicator);
+  const benchmarkHasData = !!benchmarkRecord;
+  const benchmarkLatestYear = benchmarkHasData ? currentYear : getLatestAvailableYear(currentBenchmark, currentIndicator);
 
   const rawData = getMetrics(currentYear, currentIndicator);
   

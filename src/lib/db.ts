@@ -58,3 +58,16 @@ export function getLatestAvailableYear(countryCode: string, indicator: string): 
   const row = stmt.get(countryCode, indicator) as { year: number } | undefined;
   return row ? row.year : null;
 }
+
+// Get latest available year for each country for a given indicator (single efficient query)
+export function getLatestAvailableYearForCountries(indicator: string): Record<string, number> {
+  const db = getDb();
+  const stmt = db.prepare('SELECT country_code, MAX(year) as year FROM metrics WHERE indicator = ? GROUP BY country_code');
+  const rows = stmt.all(indicator) as { country_code: string; year: number }[];
+  const result: Record<string, number> = {};
+  rows.forEach(r => {
+    result[r.country_code] = r.year;
+  });
+  return result;
+}
+
