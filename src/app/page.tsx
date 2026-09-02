@@ -70,7 +70,16 @@ export default function Home({
           Welcome to the Economic Calendar
         </h1>
         <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
-          The idea for this came in 2025, when I saw an NRK article saying that, because of the pay gap, women could be said to ‘work for free’ from a certain date until the end of the year.
+          The idea for this came in 2025, when I{" "}
+          <a
+            href="https://www.forskning.no/likestilling/i-dag-jobber-kvinner-gratis-ut-aret-hva-betyr-egentlig-det/2109606"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:underline"
+          >
+            saw an article
+          </a>{" "}
+          saying that, because of the pay gap, women could be said to ‘work for free’ from a certain date until the end of the year.
         </p>
         <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
           I’m not going to get into the pay‑gap debate here, but the way they turned a percentage into a date stuck with me. It made something abstract much easier to picture. That got me thinking: could you do the same thing with economic differences between countries? So I built it.

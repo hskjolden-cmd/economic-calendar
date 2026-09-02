@@ -3,6 +3,39 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 export default function MethodologyPage() {
   return (
     <div className="max-w-3xl mx-auto space-y-8">
+      {/* Motivation */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Motivation</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4 text-slate-700">
+          <p>
+            The idea for Economic Calendar came in 2025, when I{" "}
+            <a
+              href="https://www.forskning.no/likestilling/i-dag-jobber-kvinner-gratis-ut-aret-hva-betyr-egentlig-det/2109606"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:underline"
+            >
+              saw an article
+            </a>{" "}
+            saying that, because of the pay gap, women could be said to ‘work for free’ from a certain date until the end of the year.
+          </p>
+          <p>
+            I’m not going to get into the pay-gap debate here, but the way they turned a percentage into a date stuck with me. It made something abstract much easier to picture.
+          </p>
+          <p>
+            That made me wonder whether the same idea could be used to show economic differences between countries.
+          </p>
+          <p>
+            Instead of only saying that one country is at, for example, 50% of another country’s level, why not turn that 50% into a point halfway through the year?
+          </p>
+          <p>
+            That became the basic idea behind Economic Calendar.
+          </p>
+        </CardContent>
+      </Card>
+
       {/* 1. How does this work? */}
       <Card>
         <CardHeader>
