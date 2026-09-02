@@ -9,14 +9,14 @@ export default function MapPage({
 }) {
   const years = getYears();
   const countries = getCountries();
-  
+
   // Defaults
   const currentYear = searchParams.year ? parseInt(searchParams.year) : years[0];
   const currentIndicator = searchParams.indicator || 'gni_ppp';
   const currentBenchmark = searchParams.benchmark || 'NOR';
 
   const rawData = getMetrics(currentYear, currentIndicator);
-  
+
   const benchmarkCountry = rawData.find(d => d.country_code === currentBenchmark);
   const benchmarkValue = benchmarkCountry ? benchmarkCountry.value : 1; // fallback
   const benchmarkName = benchmarkCountry?.country_name ??
@@ -46,22 +46,22 @@ export default function MapPage({
         </p>
       </div>
 
-      <Selectors 
-        years={years} 
-        currentYear={currentYear} 
-        currentIndicator={currentIndicator} 
+      <Selectors
+        years={years}
+        currentYear={currentYear}
+        currentIndicator={currentIndicator}
         countries={countries}
         currentBenchmark={currentBenchmark}
       />
 
       <div className="mt-8">
-          <MapView
-            key={currentBenchmark}
-            data={data}
-            metricName={metricNames[currentIndicator]}
-            benchmarkCode={currentBenchmark}
-            benchmarkName={benchmarkName}
-          />
+        <MapView
+          key={currentBenchmark}
+          data={data}
+          metricName={metricNames[currentIndicator]}
+          benchmarkCode={currentBenchmark}
+          benchmarkName={benchmarkName}
+        />
       </div>
     </main>
   );
