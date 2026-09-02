@@ -6,7 +6,7 @@ import { scaleLinear } from 'd3-scale';
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 import { MetricRecord } from '@/types';
-import { getLatestAvailableYear } from '@/lib/db';
+
 
 
 const geoUrl = "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson";
@@ -65,13 +65,9 @@ export function MapView({
                   const d = dataMap.get(countryCode);
                   const isBenchmark = countryCode === benchmarkCode;
                   
-                  const tooltipText = d 
+                  const tooltipText = d
                     ? `${d.country_name}: ${(d.ratio * 100).toFixed(1)}% of ${benchmarkName} (${d.value.toLocaleString()})`
-                    : (() => {
-                        const latestYear = getLatestAvailableYear(geo.id, indicatorCode);
-                        const yearInfo = latestYear ? `Latest available: ${latestYear}` : 'No data available';
-                        return `${geo.properties.name}: No data for ${currentYear}. ${yearInfo}`;
-                      })();
+                    : `${geo.properties.name}: No data for ${currentYear}.`;
 
                   return (
                     <Geography

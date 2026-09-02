@@ -1,14 +1,19 @@
-import Database from 'better-sqlite3';
+
 import path from 'path';
 import { MetricRecord } from '@/types';
 
 // Connect to SQLite DB
 const dbPath = path.resolve(process.cwd(), 'economic_data.db');
-let db: Database.Database;
+let db: any;
 
 export function getDb() {
   if (!db) {
-    db = new Database(dbPath, { readonly: true });
+    if (typeof window === 'undefined') {
+      const BetterSqlite3 = require('better-sqlite3');
+      db = new BetterSqlite3(dbPath, { readonly: true });
+    } else {
+      throw new Error('Database access is not available on client side');
+    }
   }
   return db;
 }

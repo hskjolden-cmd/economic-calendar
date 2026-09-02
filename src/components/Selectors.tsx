@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import { countCountriesWithData } from '@/lib/db';
+
 
 export function Selectors({ 
   years, 
@@ -80,8 +80,7 @@ export function Selectors({
               <option key={y} value={y.toString()}>{y}</option>
             ))}
           </select>
-          {/* Availability indicator */}
-          <span className="text-xs text-slate-500">{`· ${countCountriesWithData(currentYear, currentIndicator)} of ${countries.length} countries`}</span>
+          {/* No availability indicator */}
         </div>
       </div>
     </div>

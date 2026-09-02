@@ -62,6 +62,7 @@ export default function MapPage({
           benchmarkCode={currentBenchmark}
           benchmarkName={benchmarkName}
           indicatorCode={currentIndicator}
+          currentYear={currentYear}
         />
       </div>
     </main>

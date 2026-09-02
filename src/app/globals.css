@@ -108,11 +108,13 @@
   /* Muted data styling for missing-data elements */
   .muted-data {
     opacity: 0.75;
-    color: #9ca3af; /* Tailwind text-gray-400 */
+    color: #9ca3af;
+    /* Tailwind text-gray-400 */
   }
 
   /* Neutral grey fill for countries with no data */
   .no-data-country {
-    fill: #e2e8f0; /* Tailwind gray-200 */
+    fill: #e2e8f0;
+    /* Tailwind gray-200 */
   }
 }
