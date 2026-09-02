@@ -47,7 +47,7 @@ export function CountdownWidget({
         <h2 className="text-sm uppercase tracking-widest text-slate-400 font-bold mb-2">Today is</h2>
         <div className="text-5xl font-extrabold mb-4">{format(today, 'MMMM do')}</div>
         <div className="text-lg text-slate-300 flex flex-wrap items-center justify-center gap-2">
-          <span>Tracking global income-equivalent dates relative to</span>
+          <span>Tracking economic level dates relative to</span>
           <select 
             value={currentBenchmark}
             onChange={e => handleBenchmarkChange(e.target.value)}

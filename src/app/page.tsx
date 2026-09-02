@@ -99,7 +99,7 @@ export default function Home({
             className="group flex flex-col p-6 rounded-xl border-2 border-blue-100 hover:border-blue-500 hover:bg-blue-50 transition-all">
             <CalendarDays className="w-10 h-10 text-blue-600 mb-4" />
             <h3 className="text-xl font-bold mb-2 group-hover:text-blue-700">Calendar View</h3>
-            <p className="text-slate-600 text-sm flex-1">Explore a 365-day visualization showing when countries reach their income‑equivalent date.</p>
+            <p className="text-slate-600 text-sm flex-1">Explore a 365-day visualization showing when countries reach their economic level date.</p>
             <div className="flex items-center text-blue-600 text-sm font-semibold mt-4 group-hover:translate-x-1 transition-transform">
               View Calendar <ArrowRight className="w-4 h-4 ml-1" />
             </div>
