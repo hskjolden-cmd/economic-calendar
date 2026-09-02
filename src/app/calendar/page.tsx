@@ -1,30 +1,27 @@
-import { getYears, getMetrics, getCountries } from "@/lib/db";
-import { Selectors } from "@/components/Selectors";
-import { CalendarView } from "@/components/CalendarView";
+import { getYears, getMetrics, getCountries, countCountriesWithData, getCountryData, getLatestAvailableYear } from '@/lib/db';
+import { Selectors } from '@/components/Selectors';
+import { CalendarView } from '@/components/CalendarView';
 
-export default function CalendarPage({
-  searchParams,
-}: {
-  searchParams: { year?: string; indicator?: string; benchmark?: string };
-}) {
-  const benchmarkLatestYear = benchmarkHasData ? currentYear : getLatestAvailableYear(currentBenchmark, currentIndicator);
-
+export default function CalendarPage({ searchParams }: { searchParams: { year?: string; indicator?: string; benchmark?: string } }) {
+  // Data fetching
+  const years = getYears();
   const countries = getCountries();
-  
+
   // Defaults
   const currentYear = searchParams.year ? parseInt(searchParams.year) : years[0];
   const currentIndicator = searchParams.indicator || 'gni_ppp';
   const currentBenchmark = searchParams.benchmark || 'NOR';
 
-  // Compute availability after defaults and countries are loaded
+  // Availability calculations
   const availableCount = countCountriesWithData(currentYear, currentIndicator);
   const totalCountries = countries.length;
   const benchmarkRecord = getCountryData(currentBenchmark, currentYear, currentIndicator);
   const benchmarkHasData = !!benchmarkRecord;
   const benchmarkLatestYear = benchmarkHasData ? currentYear : getLatestAvailableYear(currentBenchmark, currentIndicator);
 
+  // Metrics data
   const rawData = getMetrics(currentYear, currentIndicator);
-  
+
   const benchmarkCountry = rawData.find(d => d.country_code === currentBenchmark);
   const benchmarkValue = benchmarkCountry ? benchmarkCountry.value : 1;
   const benchmarkName = benchmarkCountry ? benchmarkCountry.country_name : 'Norway';
@@ -39,9 +36,9 @@ export default function CalendarPage({
   });
 
   const metricNames: Record<string, string> = {
-    'gni_ppp': 'GNI per capita (PPP)',
-    'gdp_ppp': 'GDP per capita (PPP)',
-    'gdp_nom': 'GDP per capita (Nominal)',
+    gni_ppp: 'GNI per capita (PPP)',
+    gdp_ppp: 'GDP per capita (PPP)',
+    gdp_nom: 'GDP per capita (Nominal)',
   };
 
   return (
@@ -53,21 +50,25 @@ export default function CalendarPage({
         </p>
       </div>
 
-      <Selectors 
-        years={years} 
-        currentYear={currentYear} 
-        currentIndicator={currentIndicator} 
+      <Selectors
+        years={years}
+        currentYear={currentYear}
+        currentIndicator={currentIndicator}
         countries={countries}
         currentBenchmark={currentBenchmark}
+        availableCount={availableCount}
+        totalCountries={totalCountries}
+        benchmarkHasData={benchmarkHasData}
+        benchmarkLatestYear={benchmarkLatestYear}
       />
 
       <div className="mt-8">
         {data.length > 0 ? (
-          <CalendarView 
-            data={data} 
-            metricName={metricNames[currentIndicator]} 
-            benchmarkCode={currentBenchmark} 
-            benchmarkName={benchmarkName} 
+          <CalendarView
+            data={data}
+            metricName={metricNames[currentIndicator]}
+            benchmarkCode={currentBenchmark}
+            benchmarkName={benchmarkName}
           />
         ) : (
           <div className="p-12 text-center text-slate-500 bg-white border rounded-xl">

@@ -1,4 +1,6 @@
-import { getYears, getMetrics, getCountries } from '@/lib/db';
+'use client';
+
+import { getYears, getMetrics, getCountries, countCountriesWithData, getCountryData, getLatestAvailableYear } from '@/lib/db';
 import { Selectors } from '@/components/Selectors';
 import { RankingTable } from '@/components/RankingTable';
 
@@ -7,28 +9,39 @@ export default function RankingPage({
 }: {
   searchParams: { year?: string; indicator?: string; benchmark?: string };
 }) {
+  // Data fetching
   const years = getYears();
   const countries = getCountries();
-  
-  // Defaults
+
+  // Defaults (same logic as Calendar page)
   const currentYear = searchParams.year ? parseInt(searchParams.year) : years[0];
   const currentIndicator = searchParams.indicator || 'gni_ppp';
   const currentBenchmark = searchParams.benchmark || 'NOR';
 
+  // Availability calculations
+  const availableCount = countCountriesWithData(currentYear, currentIndicator);
+  const totalCountries = countries.length;
+  const benchmarkRecord = getCountryData(currentBenchmark, currentYear, currentIndicator);
+  const benchmarkHasData = !!benchmarkRecord;
+  const benchmarkLatestYear = benchmarkHasData ? currentYear : getLatestAvailableYear(currentBenchmark, currentIndicator);
+
+  // Metrics data
   const rawData = getMetrics(currentYear, currentIndicator);
-  
+
   const benchmarkCountry = rawData.find(d => d.country_code === currentBenchmark);
   const benchmarkValue = benchmarkCountry ? benchmarkCountry.value : 1;
   const benchmarkName = benchmarkCountry ? benchmarkCountry.country_name : 'Norway';
 
-  // Recalculate ratios and sort
-  const data = rawData.map(d => {
-    const ratio = d.value / benchmarkValue;
-    let day = Math.round(ratio * 365);
-    if (day < 1) day = 1;
-    if (day > 365) day = 365;
-    return { ...d, ratio, comparison_day: day };
-  }).sort((a, b) => b.value - a.value);
+  // Recalculate ratios and sort descending by value
+  const data = rawData
+    .map(d => {
+      const ratio = d.value / benchmarkValue;
+      let day = Math.round(ratio * 365);
+      if (day < 1) day = 1;
+      if (day > 365) day = 365;
+      return { ...d, ratio, comparison_day: day };
+    })
+    .sort((a, b) => b.value - a.value);
 
   return (
     <main className="container mx-auto px-4 py-8">
@@ -39,12 +52,16 @@ export default function RankingPage({
         </p>
       </div>
 
-      <Selectors 
-        years={years} 
-        currentYear={currentYear} 
-        currentIndicator={currentIndicator} 
+      <Selectors
+        years={years}
+        currentYear={currentYear}
+        currentIndicator={currentIndicator}
         countries={countries}
         currentBenchmark={currentBenchmark}
+        availableCount={availableCount}
+        totalCountries={totalCountries}
+        benchmarkHasData={benchmarkHasData}
+        benchmarkLatestYear={benchmarkLatestYear}
       />
 
       <div className="mt-8">

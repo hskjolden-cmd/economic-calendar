@@ -1,4 +1,4 @@
-import { getYears, getMetrics, getCountries } from "@/lib/db";
+import { getYears, getMetrics, getCountries, countCountriesWithData, getCountryData, getLatestAvailableYear } from "@/lib/db";
 import { Selectors } from "@/components/Selectors";
 import { CountdownWidget } from "@/components/CountdownWidget";
 import Link from "next/link";
@@ -32,6 +32,14 @@ export default function Home({
   const currentYear = searchParams.year ? parseInt(searchParams.year) : years[0];
   const currentIndicator = searchParams.indicator || 'gni_ppp';
   const currentBenchmark = searchParams.benchmark || 'NOR';
+
+  // Availability calculations
+  const availableCount = countCountriesWithData(currentYear, currentIndicator);
+  const totalCountries = countries.length;
+  const benchmarkRecord = getCountryData(currentBenchmark, currentYear, currentIndicator);
+  const benchmarkHasData = !!benchmarkRecord;
+  const benchmarkLatestYear = benchmarkHasData ? currentYear : getLatestAvailableYear(currentBenchmark, currentIndicator);
+
 
   const rawData = getMetrics(currentYear, currentIndicator);
   const benchmarkCountry = rawData.find(d => d.country_code === currentBenchmark);
@@ -77,6 +85,10 @@ export default function Home({
           currentIndicator={currentIndicator}
           countries={countries}
           currentBenchmark={currentBenchmark}
+          availableCount={availableCount}
+          totalCountries={totalCountries}
+          benchmarkHasData={benchmarkHasData}
+          benchmarkLatestYear={benchmarkLatestYear}
         />
 
         <div className="grid sm:grid-cols-3 gap-6 mt-8">
