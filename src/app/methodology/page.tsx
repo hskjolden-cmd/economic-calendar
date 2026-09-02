@@ -96,6 +96,35 @@ export default function MethodologyPage() {
         </CardContent>
       </Card>
       
+            <Card>
+        <CardHeader>
+          <CardTitle>Where does the data come from?</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4 text-slate-700">
+          <p>All data used in Economic Calendar comes from the World Bank’s World Development Indicators.</p>
+          <ul className="list-disc pl-5 space-y-2">
+            <li>
+              GNI per capita, PPP (current international $) – 
+              <a href="https://data.worldbank.org/indicator/NY.GNP.PCAP.PP.CD" target="_blank" rel="noopener noreferrer">View this indicator at the World Bank ↗</a>
+              <br />
+              <small className="text-sm text-slate-500">NY.GNP.PCAP.PP.CD</small>
+            </li>
+            <li>
+              GDP per capita, PPP (current international $) – 
+              <a href="https://data.worldbank.org/indicator/NY.GDP.PCAP.PP.CD" target="_blank" rel="noopener noreferrer">View this indicator at the World Bank ↗</a>
+              <br />
+              <small className="text-sm text-slate-500">NY.GDP.PCAP.PP.CD</small>
+            </li>
+            <li>
+              GDP per capita (current US$) – 
+              <a href="https://data.worldbank.org/indicator/NY.GDP.PCAP.CD" target="_blank" rel="noopener noreferrer">View this indicator at the World Bank ↗</a>
+              <br />
+              <small className="text-sm text-slate-500">NY.GDP.PCAP.CD</small>
+            </li>
+          </ul>
+        </CardContent>
+      </Card>
+
       <div className="pb-12 text-sm text-slate-500">
         All data is sourced from the World Bank API.
       </div>
