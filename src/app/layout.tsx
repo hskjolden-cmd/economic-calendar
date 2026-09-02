@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import Link from "next/link";
-import { CalendarIcon, Globe, Info, BarChart3, MapIcon } from "lucide-react";
+import NavBar from "../components/NavBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,33 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-slate-50 min-h-screen flex flex-col text-slate-900`}>
-        <header className="bg-white border-b sticky top-0 z-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center h-16">
-              <Link href="/" className="flex items-center gap-2 font-bold text-xl tracking-tight text-blue-900">
-                <Globe className="w-6 h-6 text-blue-600" />
-                Economic Calendar
-              </Link>
-              <nav className="hidden sm:flex gap-6">
-                <Link href="/" className="text-sm font-medium text-slate-600 hover:text-blue-600 flex items-center gap-1.5 transition-colors">
-                  <Info className="w-4 h-4" /> Home
-                </Link>
-                <Link href="/calendar" className="text-sm font-medium text-slate-600 hover:text-blue-600 flex items-center gap-1.5 transition-colors">
-                  <CalendarIcon className="w-4 h-4" /> Calendar
-                </Link>
-                <Link href="/map" className="text-sm font-medium text-slate-600 hover:text-blue-600 flex items-center gap-1.5 transition-colors">
-                  <MapIcon className="w-4 h-4" /> Map
-                </Link>
-                <Link href="/ranking" className="text-sm font-medium text-slate-600 hover:text-blue-600 flex items-center gap-1.5 transition-colors">
-                  <BarChart3 className="w-4 h-4" /> Rankings
-                </Link>
-                <Link href="/methodology" className="text-sm font-medium text-slate-600 hover:text-blue-600 flex items-center gap-1.5 transition-colors">
-                  <Info className="w-4 h-4" /> Methodology
-                </Link>
-              </nav>
-            </div>
-          </div>
-        </header>
+        <NavBar />
 
         <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
           {children}
