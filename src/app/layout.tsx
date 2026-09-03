@@ -27,10 +27,11 @@ export default function RootLayout({
         </main>
         
         <footer className="bg-white border-t mt-auto py-8">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-500">
-            <p>Data provided by the World Bank. Norway is used solely as an economic benchmark.</p>
-            <div className="mt-2 space-x-4">
-              <Link href="/methodology" className="hover:text-blue-600">Methodology & Limitations</Link>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-500 space-y-1">
+            <p>Created by Henrik Skorpe Skjolden</p>
+            <p>Data provided by the World Bank.</p>
+            <div className="pt-1">
+              <Link href="/methodology" className="hover:text-blue-600">Methodology</Link>
             </div>
           </div>
         </footer>

@@ -45,7 +45,7 @@ export default function MethodologyPage() {
           <p>The idea behind Economic Calendar is pretty simple:</p>
           <p>Take an economic measure for one country, compare it with another country, and turn the difference into a date on the calendar.</p>
           <p>If a country is at 50% of the benchmark country's level, it lands roughly halfway through the year.</p>
-          <p>The tricky part is deciding what we actually mean by a country's “economic level”. That is where GDP, GNI and PPP come in.</p>
+          <p>The tricky part is deciding what is actually meant by a country's “economic level”. That is where GDP, GNI and PPP come in.</p>
         </CardContent>
       </Card>
 
@@ -60,11 +60,11 @@ export default function MethodologyPage() {
           <ul className="list-disc pl-5 space-y-2">
             <li>
               <strong>GNI per capita (PPP) — Recommended</strong><br />
-              I think of GNI as asking: “Which country does the income from economic activity belong to?” It includes income connected to a country’s people and businesses, even when some of that income comes from abroad. The “per capita” part means we divide the country’s GNI by its population. PPP adjusts for the fact that the same amount of money can buy very different things in different countries. For example, $1,000 may cover much more food, rent and everyday expenses in one country than in another. PPP tries to answer: “How much can people actually buy with the money in their own country?”
+              I think of GNI as asking: “Which country does the income from economic activity belong to?” It includes income connected to a country’s people and businesses, even when some of that income comes from abroad. The “per capita” part simply means dividing the country’s GNI by its population. PPP adjusts for the fact that the same amount of money can buy very different things in different countries. For example, $1,000 may cover much more food, rent and everyday expenses in one country than in another. PPP tries to answer: “How much can people actually buy with the money in their own country?”
             </li>
             <li>
               <strong>GDP per capita (PPP)</strong><br />
-              I think of GDP as asking: “Where was the economic value created?” GDP measures economic activity that happens inside a country’s borders. For example, if a German company owns a factory in Norway, what that factory produces contributes to Norwegian GDP because the production happens in Norway. Again, we divide by the population and use PPP to account for different price levels.
+              I think of GDP as asking: “Where was the economic value created?” GDP measures economic activity that happens inside a country’s borders. For example, if a German company owns a factory in Norway, what that factory produces contributes to Norwegian GDP because the production happens in Norway. Again, this is divided by the population and adjusted with PPP to account for different price levels.
             </li>
             <li>
               <strong>GDP per capita (Nominal)</strong><br />
