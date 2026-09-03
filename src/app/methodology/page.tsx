@@ -33,6 +33,9 @@ export default function MethodologyPage() {
           <p>
             That became the basic idea behind Economic Calendar.
           </p>
+          <p className="pt-2 text-slate-600 font-medium">
+            – Henrik Skorpe Skjolden
+          </p>
         </CardContent>
       </Card>
 
